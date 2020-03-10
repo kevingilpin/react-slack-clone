@@ -111,8 +111,8 @@ class Register extends React.Component {
         return (
             <Grid textAlign="center" verticalAlign="middle" className="app">
                 <Grid.Column style={{ maxWidth: 450 }}>
-                    <Header as="h2" icon color="blue" textAlign="center">
-                        <Icon name="slack" color="blue" />
+                    <Header as="h1" icon color="violet" textAlign="center">
+                        <Icon name="slack" color="violet" />
                         Register for KevChat
                     </Header>
                     <Form onSubmit={this.handleSubmit} size="large">
@@ -162,7 +162,7 @@ class Register extends React.Component {
                                 type="password" 
                             />
 
-                            <Button disabled={loading} className={loading ? 'loading' : ''} color="blue" fluid size="large">Submit</Button>
+                            <Button disabled={loading} className={loading ? 'loading' : ''} color="violet" fluid size="large">Submit</Button>
                         </Segment>
                     </Form>
                     {errors.length > 0 && (
