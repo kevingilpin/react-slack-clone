@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { setCurrentChannel } from '../../actions';
 import UserPanel from './UserPanel';
 import Channels from './Channels'
 import { Menu } from 'semantic-ui-react';
@@ -18,7 +19,7 @@ class SidePanel extends React.Component {
                 }}
             >
                 <UserPanel user={this.props.user} />
-                <Channels user={this.props.user} />
+                <Channels user={this.props.user} setCurrentChannel={this.props.setCurrentChannel} />
             </Menu>
         );
     }
@@ -28,4 +29,4 @@ const mapStateToProps = state => ({
     user: state.user.currentUser
 });
 
-export default connect(mapStateToProps)(SidePanel);
+export default connect(mapStateToProps, { setCurrentChannel })(SidePanel);
