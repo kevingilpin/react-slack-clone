@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import UserPanel from './UserPanel';
 import Channels from './Channels'
 import { Menu } from 'semantic-ui-react';
@@ -16,11 +17,15 @@ class SidePanel extends React.Component {
                     fontSize: '1.2rem'
                 }}
             >
-                <UserPanel />
-                <Channels />
+                <UserPanel user={this.props.user} />
+                <Channels user={this.props.user} />
             </Menu>
         );
     }
 }
 
-export default SidePanel;
+const mapStateToProps = state => ({
+    user: state.user.currentUser
+});
+
+export default connect(mapStateToProps)(SidePanel);
