@@ -2,16 +2,23 @@ import React from 'react';
 import firebase from '../../firebase';
 import { Segment, Button, Input } from 'semantic-ui-react';
 
+import FileModal from './FileModal';
+
 class MessageForm extends React.Component {
     state = {
         message: '',
         loading: false,
-        errors: []
-    }
+        errors: [],
+        modal: false
+    };
+
+    openModal = () => this.setState({ modal: true });
+
+    closeModal = () => this.setState({ modal: false });
 
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value });
-    }
+    };
 
     createMessage = () => {
         const { currentUser } = this.props;
@@ -26,7 +33,7 @@ class MessageForm extends React.Component {
             content: this.state.message
         };
         return message;
-    }
+    };
 
     sendMessage = () => {
         const { messagesRef, currentChannel } = this.props;
@@ -53,10 +60,10 @@ class MessageForm extends React.Component {
                 errors: this.state.errors.concat({ message: 'Add a message'})
             });
         }
-    }
+    };
 
     render() {
-        const { errors } = this.state;
+        const { errors, message, loading, modal } = this.state;
 
         return (
             <Segment id="message__form">
@@ -64,6 +71,7 @@ class MessageForm extends React.Component {
                     fluid
                     name="message"
                     onChange={this.handleChange}
+                    value={message}
                     style={{ marginBottom: '.7em' }}
                     label={<Button icon={'add'} />}
                     labelPosition="left"
@@ -77,6 +85,7 @@ class MessageForm extends React.Component {
                 <Button.Group icon widths="2">
                     <Button
                         onClick={this.sendMessage}
+                        disabled={loading}
                         color="orange"
                         content="Add Reply"
                         labelPosition="left"
@@ -84,9 +93,14 @@ class MessageForm extends React.Component {
                     />
                     <Button 
                         color="teal"
+                        onClick={this.openModal}
                         content="Upload Media"
                         labelPosition="right"
                         icon="cloud upload"
+                    />
+                    <FileModal 
+                        modal={modal}
+                        closeModal={this.closeModal}
                     />
                 </Button.Group>
             </Segment>
