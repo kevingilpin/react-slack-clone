@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Menu } from 'semantic-ui-react';
 
-import { setCurrentChannel } from '../../actions';
+import { setCurrentChannel, setPrivateChannel } from '../../actions';
 
 import UserPanel from './UserPanel';
 import Channels from './Channels';
@@ -23,7 +23,11 @@ class SidePanel extends React.Component {
                 }}
             >
                 <UserPanel user={this.props.user} />
-                <Channels user={this.props.user} setCurrentChannel={this.props.setCurrentChannel} />
+                <Channels 
+                    user={this.props.user} 
+                    setCurrentChannel={this.props.setCurrentChannel}
+                    setPrivateChannel={this.props.setPrivateChannel}
+                />
                 <DirectMessages user={this.props.user} />
             </Menu>
         );
@@ -34,4 +38,4 @@ const mapStateToProps = state => ({
     user: state.user.currentUser
 });
 
-export default connect(mapStateToProps, { setCurrentChannel })(SidePanel);
+export default connect(mapStateToProps, { setCurrentChannel, setPrivateChannel })(SidePanel);

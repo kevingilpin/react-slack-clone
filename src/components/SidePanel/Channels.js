@@ -85,6 +85,7 @@ class Channels extends React.Component {
     changeChannel = channel => {
         this.setActiveChannel(channel);
         this.props.setCurrentChannel(channel);
+        this.props.setPrivateChannel(false);
     };
 
     setActiveChannel = channel => {
