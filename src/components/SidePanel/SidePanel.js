@@ -1,9 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setCurrentChannel } from '../../actions';
-import UserPanel from './UserPanel';
-import Channels from './Channels'
+
 import { Menu } from 'semantic-ui-react';
+
+import { setCurrentChannel } from '../../actions';
+
+import UserPanel from './UserPanel';
+import Channels from './Channels';
+import DirectMessages from './DirectMessages';
 
 class SidePanel extends React.Component {
     render() {
@@ -20,6 +24,7 @@ class SidePanel extends React.Component {
             >
                 <UserPanel user={this.props.user} />
                 <Channels user={this.props.user} setCurrentChannel={this.props.setCurrentChannel} />
+                <DirectMessages />
             </Menu>
         );
     }
