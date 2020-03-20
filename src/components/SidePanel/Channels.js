@@ -132,7 +132,7 @@ class Channels extends React.Component {
     };
 
     clearNotifications = channel => {
-        let index = this.state.notifications.findIndex(notification => notification.id == channel.id);
+        let index = this.state.notifications.findIndex(notification => notification.id === channel.id);
         
         if (index !== -1) {
             let updatedNotifications = [...this.state.notifications];
