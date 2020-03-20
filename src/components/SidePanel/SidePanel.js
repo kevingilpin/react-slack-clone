@@ -25,6 +25,7 @@ class SidePanel extends React.Component {
                 <UserPanel user={this.props.user} />
                 <Channels 
                     user={this.props.user} 
+                    channel={this.props.channel}
                     setCurrentChannel={this.props.setCurrentChannel}
                     setPrivateChannel={this.props.setPrivateChannel}
                 />
@@ -35,7 +36,8 @@ class SidePanel extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    user: state.user.currentUser
+    user: state.user.currentUser,
+    channel: state.channel.currentChannel
 });
 
 export default connect(mapStateToProps, { setCurrentChannel, setPrivateChannel })(SidePanel);
