@@ -24,7 +24,7 @@ class SidePanel extends React.Component {
                 }}
             >
                 <UserPanel user={this.props.user} />
-                <Starred />
+                <Starred user={this.props.user} />
                 <Channels 
                     user={this.props.user} 
                     channel={this.props.channel}
