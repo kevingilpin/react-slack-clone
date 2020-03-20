@@ -8,6 +8,7 @@ import { setCurrentChannel, setPrivateChannel } from '../../actions';
 import UserPanel from './UserPanel';
 import Channels from './Channels';
 import DirectMessages from './DirectMessages';
+import Starred from './Starred';
 
 class SidePanel extends React.Component {
     render() {
@@ -23,6 +24,7 @@ class SidePanel extends React.Component {
                 }}
             >
                 <UserPanel user={this.props.user} />
+                <Starred />
                 <Channels 
                     user={this.props.user} 
                     channel={this.props.channel}
