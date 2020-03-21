@@ -15,6 +15,7 @@ class MessageForm extends React.Component {
         uploadState: '',
         uploadTask: null,
         storageRef: firebase.storage().ref(),
+        typingRef: firebase.database().ref('typing'),
         percentUploaded: 0
     };
 
@@ -23,8 +24,28 @@ class MessageForm extends React.Component {
     closeModal = () => this.setState({ modal: false });
 
     handleChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
+        const message = event.target.value;
+
+        this.setState({ message });
+        this.updateTyping(message);
     };
+
+    updateTyping = message => {
+        const { typingRef } = this.state;
+        const { currentUser, currentChannel } = this.props;
+
+        if (message) {
+            typingRef
+                .child(currentChannel.id)
+                .child(currentUser.uid)
+                .set(currentUser.displayName);
+        } else {
+            typingRef
+                .child(currentChannel.id)
+                .child(currentUser.uid)
+                .remove();
+        }
+    }
 
     createMessage = (fileUrl = null) => {
         const { currentUser } = this.props;
@@ -46,8 +67,8 @@ class MessageForm extends React.Component {
     };
 
     sendMessage = () => {
-        const { getMessagesRef, currentChannel } = this.props;
-        const { message } = this.state;
+        const { getMessagesRef, currentChannel, currentUser} = this.props;
+        const { message, typingRef } = this.state;
         
         if (message) {
             this.setState({ loading: true });
@@ -57,6 +78,10 @@ class MessageForm extends React.Component {
                 .set(this.createMessage())
                 .then(() => {
                     this.setState({ loading: false, message: '', errors: [] });
+                    typingRef
+                        .child(currentChannel.id)
+                        .child(currentUser.uid)
+                        .remove();
                 })
                 .catch(err => {
                     console.error(err);
