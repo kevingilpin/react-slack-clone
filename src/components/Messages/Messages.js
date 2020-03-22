@@ -51,12 +51,6 @@ class Messages extends React.Component {
     })
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.messagesEnd) {
-      this.scrollToBottom();
-    }
-  }
-
   addToListeners = (id, ref, event) => {
     const index = this.state.listeners.findIndex(listener => {
       return listener.id === id && listener.ref === ref && listener.event === event;
@@ -66,10 +60,6 @@ class Messages extends React.Component {
       const newListener = { id, ref, event };
       this.setState({ listeners: this.state.listeners.concat(newListener) });
     }
-  }
-
-  scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
   }
 
   addListeners = channelId => {
@@ -227,15 +217,19 @@ class Messages extends React.Component {
     this.props.setUserPosts(userPosts);
   }
 
-  displayMessages = messages =>
-    messages.length > 0 &&
-    messages.map(message => (
+  displayMessages = messages => {
+    messages = messages.sort((a, b) => b.timestamp - a.timestamp);
+
+    return messages.length > 0 &&
+      messages.map(message => (
       <Message
         key={message.timestamp}
         message={message}
         user={this.state.user}
       />
     ));
+  }
+    
 
   isProgressBarVisible = percent => {
     if (percent > 0) {
@@ -281,11 +275,10 @@ class Messages extends React.Component {
         />
 
         <Segment>
-          <Comment.Group className={progressBar ? 'messages__progress' : 'messages'}>
+          <Comment.Group className={progressBar ? 'messages__progress' : 'messages'} style={{ display: 'flex', flexDirection: 'column-reverse' }}>
             {this.displayMessageSkeleton(messagesLoading)}
-            {searchTerm ? this.displayMessages(searchResults) : this.displayMessages(messages)}
             {this.displayTypingUsers(typingUsers)}
-            <div ref={node => (this.messagesEnd = node)}></div>
+            {searchTerm ? this.displayMessages(searchResults) : this.displayMessages(messages)}
           </Comment.Group>
         </Segment>
 
