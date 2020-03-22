@@ -33,6 +33,12 @@ class MessageForm extends React.Component {
         this.updateTyping(message);
     };
 
+    handleKeyDown = event => {
+        if (event.keyCode === 13) {
+            this.sendMessage();
+        }
+    }
+
     handleTogglePicker = () => {
         this.setState({ emojiPicker: !this.state.emojiPicker });
 
@@ -210,15 +216,10 @@ class MessageForm extends React.Component {
                     autoFocus
                     name="message"
                     onChange={this.handleChange}
+                    onKeyDown={this.handleKeyDown}
                     value={message}
                     ref={node => (this.messageInputRef = node)}
                     style={{ marginBottom: '.7em' }}
-                    label={
-                        <Button 
-                            icon={emojiPicker ? 'close' : 'add'} 
-                            content={emojiPicker ? 'Close' : null}
-                            onClick={this.handleTogglePicker} 
-                        />}
                     labelPosition="left"
                     className={
                         errors.some(error => error.message.includes('message')) 
@@ -227,21 +228,15 @@ class MessageForm extends React.Component {
                     }
                     placeholder="Write your message"
                 />
-                <Button.Group icon widths="2">
-                    <Button
-                        onClick={this.sendMessage}
-                        disabled={loading}
-                        color="orange"
-                        content="Add Reply"
-                        labelPosition="left"
-                        icon="edit"
-                    />
+                <Button.Group>
                     <Button 
-                        color="teal"
+                        icon={emojiPicker ? 'close' : 'add'} 
+                        content={emojiPicker ? 'Close' : null}
+                        onClick={this.handleTogglePicker} 
+                    />
+                    <Button
                         disabled={uploadState === "uploading"}
                         onClick={this.openModal}
-                        content="Upload Media"
-                        labelPosition="right"
                         icon="cloud upload"
                     />
                 </Button.Group>
