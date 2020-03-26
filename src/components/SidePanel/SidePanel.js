@@ -19,7 +19,7 @@ class SidePanel extends React.Component {
                 fixed="left"
                 vertical
                 style={{ 
-                    background: '#4c3c4c',
+                    background: '#400D40',
                     fontSize: '1.2rem'
                 }}
             >

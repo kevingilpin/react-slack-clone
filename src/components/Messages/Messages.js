@@ -218,16 +218,19 @@ class Messages extends React.Component {
   }
 
   displayMessages = messages => {
-    messages = messages.sort((a, b) => b.timestamp - a.timestamp);
-
-    return messages.length > 0 &&
-      messages.map(message => (
-      <Message
-        key={message.timestamp}
-        message={message}
-        user={this.state.user}
-      />
-    ));
+    if (messages.length > 0) {
+      let sortedMessages = messages.sort((a, b) => b.timestamp - a.timestamp);
+      sortedMessages = sortedMessages.map(message => (
+        <Message
+          key={message.timestamp}
+          message={message}
+          user={this.state.user}
+        />
+      ));
+      return sortedMessages;
+    } else {
+      return null
+    }
   }
     
 
