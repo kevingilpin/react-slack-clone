@@ -1,13 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { setCurrentChannel, setPrivateChannel } from '../../actions';
 import firebase from '../../firebase';
 import { Menu, Icon } from 'semantic-ui-react';
 
 class DirectMessages extends React.Component {
     state = {
         activeChannel: '',
-        user: this.props.user,
         users: [],
         usersRef: firebase.database().ref('users'),
         connectedRef: firebase.database().ref('.info/connected'),
@@ -15,8 +12,8 @@ class DirectMessages extends React.Component {
     }
 
     componentDidMount() {
-        if (this.state.user) {
-            this.addListeners(this.state.user.uid);
+        if (this.props.user) {
+            this.addListeners(this.props.user.uid);
         }
     }
 
@@ -92,7 +89,7 @@ class DirectMessages extends React.Component {
     };
 
     getChannelId = userId => {
-        const currentUserUid = this.state.user.uid;
+        const currentUserUid = this.props.user.uid;
         return userId < currentUserUid ? 
             `${userId}/${currentUserUid}` : `${currentUserUid}/${userId}`;
     };
@@ -131,4 +128,4 @@ class DirectMessages extends React.Component {
     }
 }
 
-export default connect(null, { setCurrentChannel, setPrivateChannel })(DirectMessages);
+export default DirectMessages;

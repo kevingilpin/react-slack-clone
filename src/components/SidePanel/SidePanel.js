@@ -31,7 +31,11 @@ class SidePanel extends React.Component {
                     setCurrentChannel={this.props.setCurrentChannel}
                     setPrivateChannel={this.props.setPrivateChannel}
                 />
-                <DirectMessages user={this.props.user} />
+                <DirectMessages 
+                    user={this.props.user}
+                    setCurrentChannel={this.props.setCurrentChannel}
+                    setPrivateChannel={this.props.setPrivateChannel}
+                />
             </Menu>
         );
     }
