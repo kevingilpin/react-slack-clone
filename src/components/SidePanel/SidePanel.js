@@ -24,15 +24,19 @@ class SidePanel extends React.Component {
                 }}
             >
                 <UserPanel user={this.props.user} />
-                <Starred user={this.props.user} />
+                <Starred 
+                    user={this.props.user}
+                    channel={this.props.channel}
+                />
                 <Channels 
                     user={this.props.user} 
                     channel={this.props.channel}
                     setCurrentChannel={this.props.setCurrentChannel}
                     setPrivateChannel={this.props.setPrivateChannel}
                 />
-                <DirectMessages 
+                <DirectMessages
                     user={this.props.user}
+                    channel={this.props.channel}
                     setCurrentChannel={this.props.setCurrentChannel}
                     setPrivateChannel={this.props.setPrivateChannel}
                 />

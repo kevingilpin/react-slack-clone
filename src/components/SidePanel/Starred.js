@@ -8,7 +8,6 @@ class Starred extends React.Component {
     state = {
         user: this.props.user,
         usersRef: firebase.database().ref('users'),
-        activeChannel: '',
         starredChannels: []
     }
 
@@ -50,13 +49,8 @@ class Starred extends React.Component {
     };
 
     changeChannel = channel => {
-        this.setActiveChannel(channel);
         this.props.setCurrentChannel(channel);
         this.props.setPrivateChannel(false);
-    };
-
-    setActiveChannel = channel => {
-        this.setState({ activeChannel: channel.id });
     };
 
     displayChannels = channels => (
@@ -66,7 +60,7 @@ class Starred extends React.Component {
                 onClick={() => this.changeChannel(channel)}
                 name={channel.name}
                 style={{ opacity: .7 }}
-                active={channel.id === this.state.activeChannel}
+                active={this.props.channel ? channel.id === this.props.channel.id : false}
             >
                 # {channel.name}
             </Menu.Item>
