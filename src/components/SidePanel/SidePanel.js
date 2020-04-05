@@ -18,10 +18,6 @@ class SidePanel extends React.Component {
                 inverted
                 fixed="left"
                 vertical
-                style={{ 
-                    background: '#400D40',
-                    fontSize: '1.2rem'
-                }}
             >
                 <UserPanel user={this.props.user} />
                 <Starred 

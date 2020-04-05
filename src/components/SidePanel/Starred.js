@@ -59,7 +59,6 @@ class Starred extends React.Component {
                 key={channel.id}
                 onClick={() => this.changeChannel(channel)}
                 name={channel.name}
-                style={{ opacity: .7 }}
                 active={this.props.channel ? channel.id === this.props.channel.id : false}
             >
                 # {channel.name}

@@ -6,9 +6,73 @@ body,
     padding: 1em;
 }
 
+/* Grid */
+
+div.ui.grid>* {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+
 /* SidePanel.js */
 .menu {
     padding-bottom: 2em;
+}
+
+div.ui.inverted.menu {
+    background: #400D40;
+    font-size: 1.2rem;
+}
+
+.ui.inverted.menu a.active.item,
+.ui.inverted.menu a.active.item:hover {
+    background: #1164A3;
+}
+
+.ui.vertical.menu div.item>i.icon.add {
+    cursor: pointer;
+}
+
+.you {
+    opacity: .5;
+}
+
+.ui.vertical.inverted.menu .menu .item, .ui.vertical.inverted.menu .menu .item a:not(.ui) {
+    color: rgba(255,255,255,.7);
+}
+
+.ui.vertical.inverted.menu .menu .item.offline {
+    color: rgba(255,255,255,.3);
+}
+
+.ui.vertical.menu .item>i.icon.online {
+    color: green;
+}
+
+.ui.vertical.menu .item.offline>i.icon {
+    color: rgba(255,255,255,.3);
+}
+
+.ui.vertical.menu a.item.active>i.icon {
+    color: rgba(255,255,255,1);
+}
+
+/* User Panel */
+
+.user-panel {
+    padding: 1.2em;
+    margin: 0;
+}
+
+.user-panel__header {
+    padding: .25em;
+}
+
+/* Avatar Image Modal */
+
+.image-preview {
+    margin: 3.5em auto;
 }
 
 /* Messages.js */

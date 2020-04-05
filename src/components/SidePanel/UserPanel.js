@@ -116,14 +116,14 @@ class UserPanel extends React.Component {
         return (
             <Grid>
                 <Grid.Column>
-                    <Grid.Row style={{ padding: '1.2em', margin: 0 }}>
+                    <Grid.Row className="user-panel">
                         {/* App Header */}
                         <Header inverted floated="left" as="h2">
                             <Icon name="code" />
                             <Header.Content>KevChat</Header.Content>
                         </Header>
                         {/* User Dropdown */}
-                        <Header style={{ padding: '.25em' }} as="h4" inverted>
+                        <Header className="user-panel__header" as="h4" inverted>
                             <Dropdown 
                                 trigger={
                                     <span>
@@ -164,7 +164,7 @@ class UserPanel extends React.Component {
                                     <Grid.Column>
                                         {croppedImage && (
                                             <Image
-                                                style={{ margin: '3.5em auto' }}
+                                                className="image-preview"
                                                 width={100}
                                                 height={100}
                                                 src={croppedImage}

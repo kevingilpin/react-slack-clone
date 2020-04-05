@@ -161,7 +161,6 @@ class Channels extends React.Component {
                 key={channel.id}
                 onClick={() => this.changeChannel(channel)}
                 name={channel.name}
-                style={{ opacity: .7 }}
                 active={this.props.channel ? channel.id === this.props.channel.id : false}
             >
                 {this.getNotificationCount(channel) && (
@@ -204,7 +203,7 @@ class Channels extends React.Component {
                         <span>
                             <Icon name="exchange" /> CHANNELS
                         </span>{" "}
-                        ({ channels.length }) <Icon name="add" onClick={this.openModal} style={{ cursor: 'pointer' }} />
+                        ({ channels.length }) <Icon name="add" onClick={this.openModal} />
                     </Menu.Item>
                     {this.displayChannels(channels)}
                 </Menu.Menu>

@@ -29,13 +29,11 @@ class DirectMessages extends React.Component {
     addListeners = currentUserUid => {
         let loadedUsers = [];
         this.state.usersRef.on('child_added', snap => {
-            if (currentUserUid !== snap.key) {
-                let user = snap.val();
-                user['uid'] = snap.key;
-                user['status'] = 'offline';
-                loadedUsers.push(user);
-                this.setState({ users: loadedUsers });
-            }
+            let user = snap.val();
+            user['uid'] = snap.key;
+            currentUserUid === snap.key ? user['status'] = 'online' : user['status'] = 'offline';
+            loadedUsers.push(user);
+            this.setState({ users: loadedUsers });
         });
 
         this.state.connectedRef.on('value', snap => {
@@ -108,13 +106,13 @@ class DirectMessages extends React.Component {
                         key={user.uid}
                         active={this.props.channel ? this.getChannelId(user.uid) === this.props.channel.id : false}
                         onClick={() => this.changeChannel(user)}
-                        style={{ opacity: .7, fontstyle: 'italic' }}
+                        className={!this.isUserOnline(user) ? 'offline' : ''}
                     >
                         <Icon
-                            name="circle"
-                            color={this.isUserOnline(user) ? 'green' : 'red'}
+                            name={this.isUserOnline(user) ? "circle" : "circle outline"}
+                            className={this.isUserOnline(user) ? 'online' : ''}
                         />
-                        @ {user.name}
+                        @ {user.name} { user.uid === this.props.user.uid ? <span class="you">(you)</span> : '' }
                     </Menu.Item>
                 ))}
             </Menu.Menu>
