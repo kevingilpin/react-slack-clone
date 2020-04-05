@@ -2,7 +2,7 @@ html,
 body,
 .app {
     height: 100vh;
-    background: #eee;
+    background: #fff;
     padding: 1em;
 }
 
@@ -13,11 +13,26 @@ div.ui.grid>* {
     padding-right: 0;
 }
 
+div.ui.grid>.column:not(.row) {
+    padding: 0;
+}
 
+.ui.grid>.column:not(.row), .ui.grid>.row>.column {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+div.ui.segment {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
 
 /* SidePanel.js */
-.menu {
-    padding-bottom: 2em;
+.menu:not(:first-child) {
+    padding-top: 2em;
 }
 
 div.ui.inverted.menu {
@@ -61,7 +76,7 @@ div.ui.inverted.menu {
 /* User Panel */
 
 .user-panel {
-    padding: 1.2em;
+    padding: 0 1.2em;
     margin: 0;
 }
 
@@ -76,8 +91,12 @@ div.ui.inverted.menu {
 }
 
 /* Messages.js */
+.messages-column {
+    margin-left: 18rem;
+}
+
 .messages {
-    height: 62vh;
+    height: ;
     overflow-y: scroll;
 }
 
@@ -86,14 +105,13 @@ div.ui.inverted.menu {
     overflow-y: scroll;
 }
 
+div.ui.comments {
+    max-width: none;
+}
+
 /* MessageForm.js */
 #message__form {
-    position: fixed;
     bottom: 1em;
-    margin-left: 320px;
-    left: 0;
-    right: 1em;
-    z-index: 200;
 }
 
 .emojipicker {

@@ -9,10 +9,10 @@ import Messages from "./Messages/Messages";
 import MetaPanel from "./MetaPanel/MetaPanel";
 
 const App = ({ currentUser, currentChannel, isPrivateChannel, setUserPosts, userPosts }) => (
-  <Grid columns="equal" className="app" style={{ background: "#fff" }}>
+  <Grid columns="equal" className="app">
     <SidePanel key={currentUser && currentUser.uid} currentUser={currentUser} />
 
-    <Grid.Column style={{ marginLeft: 320 }}>
+    <Grid.Column className="messages-column">
       <Messages
         key={currentChannel && currentChannel.id}
         currentChannel={currentChannel}
@@ -22,13 +22,13 @@ const App = ({ currentUser, currentChannel, isPrivateChannel, setUserPosts, user
       />
     </Grid.Column>
 
-    <Grid.Column width={4}>
+    {/* <Grid.Column width={4}>
       <MetaPanel
         key={currentChannel && currentChannel.id}
         userPosts={userPosts}
         currentChannel={currentChannel}
         isPrivateChannel={isPrivateChannel} />
-    </Grid.Column>
+    </Grid.Column> */}
   </Grid>
 );
 

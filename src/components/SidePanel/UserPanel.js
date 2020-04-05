@@ -118,7 +118,7 @@ class UserPanel extends React.Component {
                 <Grid.Column>
                     <Grid.Row className="user-panel">
                         {/* App Header */}
-                        <Header inverted floated="left" as="h2">
+                        <Header inverted floated="left" as="h3">
                             <Icon name="code" />
                             <Header.Content>KevChat</Header.Content>
                         </Header>
