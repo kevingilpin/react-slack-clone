@@ -79,6 +79,7 @@ class Messages extends React.Component {
       this.countUniqueUsers(loadedMessages);
       this.countUserPosts(loadedMessages);
     });
+    setTimeout(() => this.setState({ messagesLoading: false }), 500);
     this.addToListeners(channelId, ref, 'child_added');
   };
 
