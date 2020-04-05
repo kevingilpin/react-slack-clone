@@ -4,9 +4,7 @@ import { Menu, Icon, Modal, Form, Input, Button, Label } from 'semantic-ui-react
 
 class Channels extends React.Component {
     state = {
-        activeChannel: '',
         user: this.props.user,
-        channel: null,
         channels: [],
         channelName: '',
         channelDetails: '',
@@ -37,8 +35,8 @@ class Channels extends React.Component {
 
     addNotificationListener = channelId => {
         this.state.messagesRef.child(channelId).on('value', snap => {
-            if (this.state.channel) {
-                this.handleNotifications(channelId, this.state.channel.id, this.state.notifications, snap);
+            if (this.props.channel) {
+                this.handleNotifications(channelId, this.props.channel.id, this.state.notifications, snap);
             }
         })
     };
@@ -82,7 +80,6 @@ class Channels extends React.Component {
         const firstChannel = this.state.channels[0];
         if (this.state.firstLoad && this.state.channels.length > 0) {
             this.props.setCurrentChannel(firstChannel);
-            this.setActiveChannel(firstChannel);
             this.setState({ channel: firstChannel });
         }
         this.setState({ firstLoad: false });
@@ -128,9 +125,8 @@ class Channels extends React.Component {
     };
 
     changeChannel = channel => {
-        this.setActiveChannel(channel);
         this.state.typingRef
-                .child(this.state.channel.id)
+                .child(this.props.channel.id)
                 .child(this.state.user.uid)
                 .remove();
         this.clearNotifications(channel);
@@ -150,10 +146,6 @@ class Channels extends React.Component {
         }
     };
 
-    setActiveChannel = channel => {
-        this.setState({ activeChannel: channel.id });
-    };
-
     displayChannels = channels => (
         channels.length > 0 && channels.map(channel => (
             <Menu.Item
@@ -161,7 +153,7 @@ class Channels extends React.Component {
                 onClick={() => this.changeChannel(channel)}
                 name={channel.name}
                 style={{ opacity: .7 }}
-                active={channel.id === this.state.activeChannel}
+                active={this.props.channel ? channel.id === this.props.channel.id : false}
             >
                 {this.getNotificationCount(channel) && (
                     <Label color="red">{this.getNotificationCount(channel)}</Label>
