@@ -267,7 +267,7 @@ class Messages extends React.Component {
     const { messagesRef, messages, channel, user, progressBar, numUniqueUsers, searchTerm, searchResults, searchLoading, privateChannel, isChannelStarred, typingUsers, messagesLoading } = this.state;
 
     return (
-      <React.Fragment>
+      <div style={{ display: 'flex', flexFlow: 'column', height: '100%'}}>
         <MessagesHeader
           channelName={this.displayChannelName(channel)}
           numUniqueUsers={numUniqueUsers}
@@ -276,10 +276,11 @@ class Messages extends React.Component {
           isPrivateChannel={privateChannel}
           isChannelStarred={isChannelStarred}
           handleStar={this.handleStar}
+          style={{ flex: '0 1 auto' }}
         />
 
-        <Segment>
-          <Comment.Group className={progressBar ? 'messages__progress' : 'messages'} style={{ display: 'flex', flexDirection: 'column-reverse' }}>
+        <Segment style={{ flex: '1 1 auto' }}>
+          <Comment.Group className={progressBar ? 'messages__progress' : 'messages'} style={{ display: 'flex', flexDirection: 'column-reverse', height: '100%' }}>
             {this.displayMessageSkeleton(messagesLoading)}
             {this.displayTypingUsers(typingUsers)}
             {searchTerm ? this.displayMessages(searchResults) : this.displayMessages(messages)}
@@ -293,8 +294,9 @@ class Messages extends React.Component {
           isProgressBarVisible={this.isProgressBarVisible}
           isPrivateChannel={privateChannel}
           getMessagesRef={this.getMessagesRef}
+          style={{ flex: '0 1 5rem' }}
         />
-      </React.Fragment>
+      </div>
     );
   }
 }
