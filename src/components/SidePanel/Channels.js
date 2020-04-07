@@ -16,6 +16,10 @@ class Channels extends React.Component {
         firstLoad: true
     };
 
+    filterChannels(channels) {
+        return channels.filter(channel => !this.props.starredChannels.some(starredChannel => channel.id === starredChannel.id));
+    }
+
     componentDidMount() {
         this.addListeners();
     }
@@ -146,15 +150,6 @@ class Channels extends React.Component {
         }
     };
 
-
-    /*
-        Add in logic to retrieve list of favorited channels passed in via props,
-        Add logic to SidePanel to retreive favorites from firebase to pass to this and Starred.js
-        and change the map function to a reduce function maintaining an array,
-        during each iteration through the reduce function, check to see if the 
-        favorited channels contains the current channel, and only add a menu item
-        to the reduced array if it does not
-    */
     displayChannels = channels => (
         channels.length > 0 && channels.map(channel => (
             <Menu.Item
@@ -195,6 +190,7 @@ class Channels extends React.Component {
 
     render() {
         const { channels, modal } = this.state;
+        const filteredChannels = this.filterChannels(channels);
 
         return (
             <React.Fragment>
@@ -205,7 +201,7 @@ class Channels extends React.Component {
                         </span>{" "}
                         ({ channels.length }) <Icon name="add" onClick={this.openModal} />
                     </Menu.Item>
-                    {this.displayChannels(channels)}
+                    {this.displayChannels(filteredChannels)}
                 </Menu.Menu>
 
                 <Modal basic open={modal} onClose={this.closeModal}>

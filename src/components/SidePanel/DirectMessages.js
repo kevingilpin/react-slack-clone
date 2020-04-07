@@ -112,7 +112,7 @@ class DirectMessages extends React.Component {
                             name={this.isUserOnline(user) ? "circle" : "circle outline"}
                             className={this.isUserOnline(user) ? 'online' : ''}
                         />
-                        @ {user.name} { user.uid === this.props.user.uid ? <span class="you">(you)</span> : '' }
+                        @ {user.name} { user.uid === this.props.user.uid ? <span className="you">(you)</span> : '' }
                     </Menu.Item>
                 ))}
             </Menu.Menu>

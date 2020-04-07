@@ -24,6 +24,17 @@ class MessagesHeader extends React.Component {
                 </Header>
 
                 {/* Channel Search Input */}
+                {/* <Header floated="true">
+                    <Input
+                        loading={searchLoading}
+                        onChange={handleSearchChange}
+                        size="mini"
+                        icon="search"
+                        name="searchTerm"
+                        placeholder="Search Messages"
+                    />
+                </Header> */}
+
                 <Header floated="right">
                     <Input
                         loading={searchLoading}
@@ -34,6 +45,7 @@ class MessagesHeader extends React.Component {
                         placeholder="Search Messages"
                     />
                 </Header>
+                
             </Segment>
         );
     }
